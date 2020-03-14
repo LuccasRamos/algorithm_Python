@@ -1,0 +1,188 @@
+sudo tar zxvf /opt/mysql-8.idx.3-rc-linux-glibc2.12-x86_64.tar.gz
+mysql-8.idx.3-rc-linux-glibc2.12-x86_64/bin/myisam_ftdump
+mysql-8.idx.3-rc-linux-glibc2.12-x86_64/bin/myisamchk
+mysql-8.idx.3-rc-linux-glibc2.12-x86_64/bin/myisamlog
+mysql-8.idx.3-rc-linux-glibc2.12-x86_64/bin/myisampack
+mysql-8.idx.3-rc-linux-glibc2.12-x86_64/bin/mysql
+~ 
+
+======================================
+=ERROS 
+=====================================
+
+1- instalar lib ncurses-compat-libs ou  libtinfo5    
+
+2idx19-12-29T154653.774754Z 5 [Note] A temporary password is generated for root@localhost =a1>imuQPU?p 
+
+
+ * Procedimento instalacao mysql 8 * 
+
+=============================================
+= 1 - Instala dependencias 
+=============================================
+ 
+sudo apt-get install -y libaio1
+sudo apt-get install -y libtinfo5 
+sudo apt-get install -y ncurses-compat-libs
+
+=============================================
+= 2 - BAIXAR ARQUIVOS BINARIOS  
+=============================================
+cd /opt
+wget https//dev.mysql.com/get/Downloads/MySQL-8.idx/mysql-8.idx.3-rc-linux-glibc2.12-x86_64.tar.gz                         #VERSAO 8.idx/ testar com  avers
+
+
+=============================================
+= 3 - CONFIGURAR GRUPOS E USUARIOS  
+=============================================
+ 
+sudo groupadd mysql 
+sudo useradd -r -g mysql -s /bin/false  mysql 
+
+
+=============================================
+= 4 - MOVE ARQUIVOS PARA O LOCAL DE INSTALACAO 
+=============================================
+ 
+mkdir usr/local/mysql
+cp /opt/mysql-8.idx.3-rc-linux-glibc2.12-x86_64.tar.gz  usr/local/mysql
+
+sudo tar zxvf mysql-8.idx.3-rc-linux-glibc2.12-x86_64.tar.gz
+
+
+=============================================
+= 5 - CRIA LINK SIMBOLICO 
+=============================================
+
+sudo ln -s mysql-8.idx.3-rc-linux-glibc2.12-x86_64 mysql
+
+=============================================
+= 4 - CRIACAO DOS DIRETORIOS 
+=============================================
+
+cd mysql
+sudo mkdir mysql-files
+sudo chmod 75idx mysql-files
+sudo chown -R mysql .
+sudo chgrp -R mysql . 
+
+sudo bin/mysqld --initialize --user=mysql 
+
+
+sudo bin/mysql_ssl_rsa_setup
+
+
+shell> sudo chown -R root .
+shell> sudo chown -R mysql data mysql-files
+
+
+sudo cp support-files/mysql.server /etc/init.d/mysql
+
+
+ export PATH=$PATH/opt/mysql/bin 
+
+
+
+/opt/mysql/bin/mysqld --defaults-file=/opt/mysql/my.cnf --user=mysql --initialize   
+
+gera a linha abaixo
+ 2idx19-12-3idxTidxidxidx55idx.472344Z 5 [Note] A temporary password is generated for root@localhost yV+n;n#Wl2/w  
+
+
+
+ opt/mysql/bin/mysqld --defaults-file=opt/mysql/my.cnf --user=root &  
+
+ bin/mysql_secure_installation --defaults-file=my.cnf --> NAO ESQUECER DE ALTERAR O SOCKET NO ARQUIVO my.cnf
+
+
+screen -d -m mysqld --defaults-file=/opt/mysql/my.cnf -uroot
+
+[client]
+socket = /data/mysql.sock
+[mysqld]
+server-id = 1
+socket = /data/mysql.sock
+port =  33idx6
+basedir = /opt/mysql 
+datadir = /data 
+
+
+server idx1
+2idx2idx-idx1-idx1Tidxidx4119.772227Z 5 [Note] A temporary password is generated for root@localhost zfqZa_tm*4Or
+192.168.1.33
+
+
+sc delete OracleOraDB19Home1TNSListener
+
+sc delete OracleRemExecServiceV2
+
+
+server idx2 
+2idx2idx-idx1-idx1Tidxidx4251.idx4idx786Z 5 [Note] A temporary password is generated for root@localhost vyj*biJr(9Ws
+192.168.1.65 
+
+
+[client]
+socket = /data/mysql.sock
+[mysqld_safe]
+log_error=/var/log/mysql/mysql_error.log                                                                                                            
+[mysqld]
+server-id = 1
+socket = /data/mysql.sock
+port =  33idx6
+basedir = /opt/mysql
+datadir = /data
+bind-address = 192.168.1.164
+log_bin = /var/log/mysql/mysql-bin.log
+binlog_do_db = teste
+log_error=/var/log/mysql/mysql_error.log
+general_log_file=/var/log/mysql/mysql.log
+general_log = 1
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+long_query_time = 2
+log-queries-not-using-indexes   
+
+
+
+
+GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%' IDENTIFIED BY 'dbuser';
+
+flush privileges; 
+
+use teste
+
+
+show master status 
+
+
+sudo cp support-files/mysql.server /etc/init.d/mysql start
+
+
+
+mysql-idx1-bin.idxidxidxidxidx2 |      636
+
+CHANGE MASTER TO MASTER_HOST='192.168.1.164',MASTER_USER='replication', MASTER_PASSWORD='dbuser', MASTER_LOG_FILE='mysql-idx1-bin.idxidxidxidxidx2', MASTER_LOG_POS= 636;
+
+
+screen -d -m  mysqld --defaults-file=/opt/mysql/my.cnf -uroot
+mysql --defaults-file=/opt/mysql/my.cnf -uroot -pdbuser; 
+
+
+
+CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.idxidxidxidx14', MASTER_LOG_POS= 175idx;
+
+CHANGE MASTER TO MASTER_LOG_FILE='log-bin.idxidxidxidxidxX', MASTER_LOG_PO
+
+ 
+155; 
+
+insert into teste2 values(1);
+insert into teste2 values(32);
+insert into teste2 values(4);
+insert into teste2 values(6);
+
+insert into teste4 values(1);
+insert into teste4 values(32);
+insert into teste4 values(4);
+insert into teste4 values(6);
